@@ -2,8 +2,19 @@
 
 namespace TomatoPHP\FilamentUsers\Resources;
 
+use Filament\Schemas\Schema;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Toggle;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use TomatoPHP\FilamentUsers\Resources\TeamResource\Pages\ListTeams;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -18,7 +29,7 @@ class TeamResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-user-group';
 
     public static function getLabel(): ?string
     {
@@ -44,10 +55,10 @@ class TeamResource extends Resource
         return config('filament-users.group') ?: trans('filament-users::user.group');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 //                Forms\Components\SpatieMediaLibraryFileUpload::make('avatar')
                 //                    ->label(trans('filament-users::user.team.columns.avatar'))
                 //                    ->hiddenLabel()
@@ -55,17 +66,17 @@ class TeamResource extends Resource
                 //                    ->avatar()
                 //                    ->collection('avatar')
                 //                    ->image(),
-                Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                     ->label(trans('filament-users::user.team.columns.name'))
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Select::make('user_id')
+                Select::make('user_id')
                     ->label(trans('filament-users::user.team.columns.owner'))
                     ->relationship('owner', 'name')
                     ->required()
                     ->preload()
                     ->searchable(),
-                Forms\Components\Toggle::make('personal_team')
+                Toggle::make('personal_team')
                     ->label(trans('filament-users::user.team.columns.personal_team')),
             ])->columns(1);
     }
@@ -75,11 +86,11 @@ class TeamResource extends Resource
         $columns = [];
 
         if (filament('filament-user')::hasAvatar()) {
-            $columns[] = Tables\Columns\TextColumn::make('owner.name')
+            $columns[] = TextColumn::make('owner.name')
                 ->label(trans('filament-users::user.team.columns.owner'))
                 ->sortable();
         } else {
-            $columns[] = Tables\Columns\TextColumn::make('owner.name')
+            $columns[] = TextColumn::make('owner.name')
                 ->label(trans('filament-users::user.team.columns.owner'))
                 ->sortable();
         }
@@ -91,36 +102,36 @@ class TeamResource extends Resource
                 //                    ->collection('avatar')
                 //                    ->label(trans('filament-users::user.team.columns.avatar'))
                 //                    ->toggleable(),
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label(trans('filament-users::user.team.columns.name'))
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\IconColumn::make('personal_team')
+                IconColumn::make('personal_team')
                     ->label(trans('filament-users::user.team.columns.personal_team'))
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ], $columns))
             ->filters([
-                Tables\Filters\SelectFilter::make('owner')
+                SelectFilter::make('owner')
                     ->label(trans('filament-users::user.team.columns.owner'))
                     ->searchable()
                     ->relationship('owner', 'name'),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+            ->recordActions([
+                EditAction::make(),
+                DeleteAction::make(),
             ])
             ->defaultSort('id', 'desc')
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -135,7 +146,7 @@ class TeamResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTeams::route('/'),
+            'index' => ListTeams::route('/'),
         ];
     }
 }

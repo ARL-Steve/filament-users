@@ -2,14 +2,17 @@
 
 namespace TomatoPHP\FilamentUsers\Resources\UserResource\Actions;
 
+use TomatoPHP\FilamentUsers\Resources\UserResource\Actions\Contracts\CanRegister;
+use TomatoPHP\FilamentUsers\Resources\UserResource\Actions\Components\CreateAction;
+
 class ManageUserActions
 {
-    use Contracts\CanRegister;
+    use CanRegister;
 
     public function getDefaultActions(): array
     {
         return [
-            Components\CreateAction::make(),
+            CreateAction::make(),
         ];
     }
 }

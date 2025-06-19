@@ -9,17 +9,17 @@ use TomatoPHP\FilamentUsers\Facades\FilamentUser;
 
 class DeleteAction extends Action
 {
-    public static function make(): Tables\Actions\Action
+    public static function make(): \Filament\Actions\Action
     {
-        return Tables\Actions\DeleteAction::make()
-            ->using(function (Model $record, Tables\Actions\Action $action) {
+        return \Filament\Actions\DeleteAction::make()
+            ->using(function (Model $record, \Filament\Actions\Action $action) {
                 self::checkIfLastUserOrCurrentUser($record, $action);
             })
             ->iconButton()
             ->tooltip(trans('filament-users::user.resource.title.delete'));
     }
 
-    private static function checkIfLastUserOrCurrentUser(Model $record, Tables\Actions\Action $action): void
+    private static function checkIfLastUserOrCurrentUser(Model $record, \Filament\Actions\Action $action): void
     {
         $count = FilamentUser::getModel()::query()->count();
         if ($count === 1) {

@@ -2,13 +2,14 @@
 
 namespace TomatoPHP\FilamentUsers\Resources\UserResource\Infolist\Entries;
 
+use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists;
 
 class Teams extends Entry
 {
-    public static function make(): Infolists\Components\TextEntry
+    public static function make(): TextEntry
     {
-        return Infolists\Components\TextEntry::make('teams.name')
+        return TextEntry::make('teams.name')
             ->visible(fn ($record) => $record->teams->isNotEmpty())
             ->columnSpanFull()
             ->badge()

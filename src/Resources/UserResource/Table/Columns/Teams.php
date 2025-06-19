@@ -2,13 +2,14 @@
 
 namespace TomatoPHP\FilamentUsers\Resources\UserResource\Table\Columns;
 
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables;
 
 class Teams extends Column
 {
-    public static function make(): Tables\Columns\TextColumn
+    public static function make(): TextColumn
     {
-        return Tables\Columns\TextColumn::make('teams.name')
+        return TextColumn::make('teams.name')
             ->color('info')
             ->icon('heroicon-o-users')
             ->toggleable()

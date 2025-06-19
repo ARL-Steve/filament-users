@@ -2,15 +2,19 @@
 
 namespace TomatoPHP\FilamentUsers\Resources\UserResource\Actions;
 
+use TomatoPHP\FilamentUsers\Resources\UserResource\Actions\Contracts\CanRegister;
+use TomatoPHP\FilamentUsers\Resources\UserResource\Actions\Components\ViewAction;
+use TomatoPHP\FilamentUsers\Resources\UserResource\Actions\Components\DeleteAction;
+
 class EditPageActions
 {
-    use Contracts\CanRegister;
+    use CanRegister;
 
     public function getDefaultActions(): array
     {
         return [
-            Components\ViewAction::make(),
-            Components\DeleteAction::make(),
+            ViewAction::make(),
+            DeleteAction::make(),
         ];
     }
 }

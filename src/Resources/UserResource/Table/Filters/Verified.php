@@ -2,6 +2,7 @@
 
 namespace TomatoPHP\FilamentUsers\Resources\UserResource\Table\Filters;
 
+use Filament\Forms\Components\Toggle;
 use Filament\Forms;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
@@ -11,8 +12,8 @@ class Verified extends Filter
     public static function make(): Tables\Filters\Filter
     {
         return Tables\Filters\Filter::make('verified')
-            ->form([
-                Forms\Components\Toggle::make('verified'),
+            ->schema([
+                Toggle::make('verified'),
             ])
             ->label(trans('filament-users::user.resource.verified'))
             ->query(function (Builder $query, array $data): Builder {

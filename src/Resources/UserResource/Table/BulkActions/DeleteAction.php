@@ -2,6 +2,8 @@
 
 namespace TomatoPHP\FilamentUsers\Resources\UserResource\Table\BulkActions;
 
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\BulkAction;
 use Filament\Notifications\Notification;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Model;
@@ -9,10 +11,10 @@ use TomatoPHP\FilamentUsers\Facades\FilamentUser;
 
 class DeleteAction extends Action
 {
-    public static function make(): Tables\Actions\DeleteBulkAction
+    public static function make(): DeleteBulkAction
     {
-        return Tables\Actions\DeleteBulkAction::make()
-            ->using(function ($records, Tables\Actions\BulkAction $action) {
+        return DeleteBulkAction::make()
+            ->using(function ($records, BulkAction $action) {
                 foreach ($records as $record) {
                     self::checkIfLastUserOrCurrentUser($record);
                 }

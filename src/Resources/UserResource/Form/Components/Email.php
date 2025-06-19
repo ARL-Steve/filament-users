@@ -10,9 +10,9 @@ class Email extends Component
     /**
      * @return TextInput
      */
-    public static function make(): Forms\Components\TextInput
+    public static function make(): TextInput
     {
-        return Forms\Components\TextInput::make('email')
+        return TextInput::make('email')
             ->email()
             ->required()
             ->label(trans('filament-users::user.resource.email'));

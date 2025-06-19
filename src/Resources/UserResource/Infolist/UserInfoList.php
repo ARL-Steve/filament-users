@@ -2,24 +2,27 @@
 
 namespace TomatoPHP\FilamentUsers\Resources\UserResource\Infolist;
 
+use Filament\Schemas\Schema;
+use TomatoPHP\FilamentUsers\Resources\UserResource\Infolist\Entries\Name;
+use TomatoPHP\FilamentUsers\Resources\UserResource\Infolist\Entries\Email;
+use TomatoPHP\FilamentUsers\Resources\UserResource\Infolist\Entries\Verified;
 use Filament\Infolists\Components\Entry;
-use Filament\Infolists\Infolist;
 
 class UserInfoList
 {
     protected static array $schema = [];
 
-    public static function make(Infolist $infolist): Infolist
+    public static function make(Schema $schema): Schema
     {
-        return $infolist->schema(self::getSchema());
+        return $schema->components(self::getSchema());
     }
 
     public static function getDefaultComponents(): array
     {
         return [
-            Entries\Name::make(),
-            Entries\Email::make(),
-            Entries\Verified::make(),
+            Name::make(),
+            Email::make(),
+            Verified::make(),
         ];
     }
 

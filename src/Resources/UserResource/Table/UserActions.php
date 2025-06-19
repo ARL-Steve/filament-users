@@ -2,6 +2,11 @@
 
 namespace TomatoPHP\FilamentUsers\Resources\UserResource\Table;
 
+use TomatoPHP\FilamentUsers\Resources\UserResource\Table\Actions\ViewAction;
+use TomatoPHP\FilamentUsers\Resources\UserResource\Table\Actions\EditAction;
+use TomatoPHP\FilamentUsers\Resources\UserResource\Table\Actions\DeleteAction;
+use Filament\Actions\Action;
+
 class UserActions
 {
     /**
@@ -17,9 +22,9 @@ class UserActions
     private static function getDefaultActions(): array
     {
         return [
-            Actions\ViewAction::make(),
-            Actions\EditAction::make(),
-            Actions\DeleteAction::make(),
+            ViewAction::make(),
+            EditAction::make(),
+            DeleteAction::make(),
         ];
     }
 
@@ -28,11 +33,11 @@ class UserActions
         return array_merge(self::getDefaultActions(), self::$actions);
     }
 
-    public static function register(\Filament\Tables\Actions\Action | array $action): void
+    public static function register(Action | array $action): void
     {
         if (is_array($action)) {
             foreach ($action as $item) {
-                if ($item instanceof \Filament\Tables\Actions\Action) {
+                if ($item instanceof Action) {
                     self::$actions[] = $item;
                 }
             }

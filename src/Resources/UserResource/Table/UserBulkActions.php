@@ -2,7 +2,7 @@
 
 namespace TomatoPHP\FilamentUsers\Resources\UserResource\Table;
 
-use Filament\Tables\Actions\BulkAction;
+use Filament\Actions\BulkAction;
 use TomatoPHP\FilamentUsers\Resources\UserResource\Table\BulkActions\DeleteAction;
 
 class UserBulkActions

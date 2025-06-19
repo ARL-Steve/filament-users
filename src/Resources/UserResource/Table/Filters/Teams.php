@@ -2,13 +2,14 @@
 
 namespace TomatoPHP\FilamentUsers\Resources\UserResource\Table\Filters;
 
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables;
 
 class Teams extends Filter
 {
-    public static function make(): Tables\Filters\SelectFilter
+    public static function make(): SelectFilter
     {
-        return Tables\Filters\SelectFilter::make('teams')
+        return SelectFilter::make('teams')
             ->label(trans('filament-users::user.resource.teams'))
             ->multiple()
             ->searchable()

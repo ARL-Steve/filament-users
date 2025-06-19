@@ -2,6 +2,8 @@
 
 namespace TomatoPHP\FilamentUsers\Resources\TeamResource\Pages;
 
+use Filament\Actions\CreateAction;
+use Filament\Actions\Action;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
 use Illuminate\Support\Facades\DB;
@@ -14,8 +16,8 @@ class ListTeams extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
-                ->using(function (array $data, Actions\Action $action) {
+            CreateAction::make()
+                ->using(function (array $data, Action $action) {
                     DB::table('teams')->insert([
                         'name' => $data['name'],
                         'personal_team' => false,

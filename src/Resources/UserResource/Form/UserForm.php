@@ -2,25 +2,29 @@
 
 namespace TomatoPHP\FilamentUsers\Resources\UserResource\Form;
 
+use Filament\Schemas\Schema;
+use TomatoPHP\FilamentUsers\Resources\UserResource\Form\Components\Name;
+use TomatoPHP\FilamentUsers\Resources\UserResource\Form\Components\Email;
+use TomatoPHP\FilamentUsers\Resources\UserResource\Form\Components\Password;
+use TomatoPHP\FilamentUsers\Resources\UserResource\Form\Components\PasswordConfirmation;
 use Filament\Forms\Components\Field;
-use Filament\Forms\Form;
 
 class UserForm
 {
     protected static array $schema = [];
 
-    public static function make(Form $form): Form
+    public static function make(Schema $schema): Schema
     {
-        return $form->schema(self::getSchema())->columns(2);
+        return $schema->components(self::getSchema())->columns(2);
     }
 
     public static function getDefaultComponents(): array
     {
         return [
-            Components\Name::make(),
-            Components\Email::make(),
-            Components\Password::make(),
-            Components\PasswordConfirmation::make(),
+            Name::make(),
+            Email::make(),
+            Password::make(),
+            PasswordConfirmation::make(),
         ];
     }
 

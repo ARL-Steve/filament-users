@@ -2,8 +2,12 @@
 
 namespace TomatoPHP\FilamentUsers\Resources;
 
-use Filament\Forms\Form;
-use Filament\Infolists\Infolist;
+use Filament\Schemas\Schema;
+use TomatoPHP\FilamentUsers\Resources\UserResource\Pages\ManageUsers;
+use TomatoPHP\FilamentUsers\Resources\UserResource\Pages\ListUsers;
+use TomatoPHP\FilamentUsers\Resources\UserResource\Pages\CreateUser;
+use TomatoPHP\FilamentUsers\Resources\UserResource\Pages\EditUser;
+use TomatoPHP\FilamentUsers\Resources\UserResource\Pages\ViewUser;
 use Filament\Resources\Pages\PageRegistration;
 use Filament\Resources\RelationManagers\RelationGroup;
 use Filament\Resources\RelationManagers\RelationManagerConfiguration;
@@ -16,7 +20,7 @@ class UserResource extends Resource
 {
     protected static ?int $navigationSort = 9;
 
-    protected static ?string $navigationIcon = 'heroicon-o-user';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-user';
 
     public static function getNavigationLabel(): string
     {
@@ -52,14 +56,14 @@ class UserResource extends Resource
         return trans('filament-users::user.resource.title.resource');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return config('filament-users.resource.form.class')::make($form);
+        return config('filament-users.resource.form.class')::make($schema);
     }
 
-    public static function infolist(Infolist $infolist): Infolist
+    public static function infolist(Schema $schema): Schema
     {
-        return config('filament-users.resource.infolist.class')::make($infolist);
+        return config('filament-users.resource.infolist.class')::make($schema);
     }
 
     public static function table(Table $table): Table
@@ -81,12 +85,12 @@ class UserResource extends Resource
     public static function getPages(): array
     {
         return config('filament-users.simple') ? [
-            'index' => Pages\ManageUsers::route('/'),
+            'index' => ManageUsers::route('/'),
         ] : [
-            'index' => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUser::route('/create'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
-            'view' => Pages\ViewUser::route('/{record}'),
+            'index' => ListUsers::route('/'),
+            'create' => CreateUser::route('/create'),
+            'edit' => EditUser::route('/{record}/edit'),
+            'view' => ViewUser::route('/{record}'),
         ];
     }
 }

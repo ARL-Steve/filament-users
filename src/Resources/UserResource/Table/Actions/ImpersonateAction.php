@@ -2,18 +2,19 @@
 
 namespace TomatoPHP\FilamentUsers\Resources\UserResource\Table\Actions;
 
+use STS\FilamentImpersonate\Tables\Actions\Impersonate;
 use Filament\Tables;
 
 class ImpersonateAction extends Action
 {
-    public static function make(): Tables\Actions\Action
+    public static function make(): \Filament\Actions\Action
     {
         if (class_exists("\STS\FilamentImpersonate\Tables\Actions\Impersonate")) {
-            return \STS\FilamentImpersonate\Tables\Actions\Impersonate::make('impersonate')
-                ->redirectTo(fn () => filament()->getCurrentPanel()->getUrl())
+            return Impersonate::make('impersonate')
+                ->redirectTo(fn () => filament()->getCurrentOrDefaultPanel()->getUrl())
                 ->tooltip(trans('filament-users::user.resource.title.impersonate'));
         }
 
-        return Tables\Actions\Action::make('impersonate');
+        return \Filament\Actions\Action::make('impersonate');
     }
 }

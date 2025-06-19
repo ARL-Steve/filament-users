@@ -6,9 +6,9 @@ use Filament\Tables;
 
 class ViewAction extends Action
 {
-    public static function make(): Tables\Actions\Action
+    public static function make(): \Filament\Actions\Action
     {
-        return Tables\Actions\ViewAction::make()
+        return \Filament\Actions\ViewAction::make()
             ->iconButton()
             ->tooltip(trans('filament-users::user.resource.title.show'));
     }

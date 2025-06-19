@@ -11,9 +11,9 @@ class Password extends Component
     /**
      * @return TextInput
      */
-    public static function make(): Forms\Components\TextInput
+    public static function make(): TextInput
     {
-        return Forms\Components\TextInput::make('password')
+        return TextInput::make('password')
             ->label(__('filament-panels::pages/auth/register.form.password.label'))
             ->password()
             ->revealable(filament()->arePasswordsRevealable())

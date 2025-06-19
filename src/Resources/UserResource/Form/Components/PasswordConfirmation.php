@@ -10,9 +10,9 @@ class PasswordConfirmation extends Component
     /**
      * @return TextInput
      */
-    public static function make(): Forms\Components\TextInput
+    public static function make(): TextInput
     {
-        return Forms\Components\TextInput::make('passwordConfirmation')
+        return TextInput::make('passwordConfirmation')
             ->label(__('filament-panels::pages/auth/register.form.password_confirmation.label'))
             ->password()
             ->revealable(filament()->arePasswordsRevealable())

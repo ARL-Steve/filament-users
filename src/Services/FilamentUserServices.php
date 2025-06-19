@@ -2,6 +2,8 @@
 
 namespace TomatoPHP\FilamentUsers\Services;
 
+use RuntimeException;
+
 class FilamentUserServices
 {
     private array $relations = [];
@@ -46,7 +48,7 @@ class FilamentUserServices
 
         // Ensure the model class exists
         if (! class_exists($model)) {
-            throw new \RuntimeException("Model class {$model} does not exist.");
+            throw new RuntimeException("Model class {$model} does not exist.");
         }
 
         // Return the model class name (or you can return the count if needed)

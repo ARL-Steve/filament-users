@@ -2,28 +2,30 @@
 
 namespace TomatoPHP\FilamentUsers\Resources\UserResource\Table\BulkActions;
 
+use Filament\Actions\BulkAction;
+use Filament\Forms\Components\Select;
 use Filament\Forms;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Collection;
 
 class TeamsAction extends Action
 {
-    public static function make(): Tables\Actions\BulkAction
+    public static function make(): BulkAction
     {
-        return Tables\Actions\BulkAction::make('teams')
+        return BulkAction::make('teams')
             ->requiresConfirmation()
             ->color('info')
             ->icon('heroicon-o-users')
             ->label(trans('filament-users::user.bulk.teams'))
-            ->form([
-                Forms\Components\Select::make('teams')
+            ->schema([
+                Select::make('teams')
                     ->label(trans('filament-users::user.resource.teams'))
                     ->multiple()
                     ->searchable()
                     ->preload()
                     ->options(config('filament-users.team_model')::query()->pluck('name', 'id')->toArray()),
             ])
-            ->action(function (array $data, Collection $records, Tables\Actions\BulkAction $action) {
+            ->action(function (array $data, Collection $records, BulkAction $action) {
                 $teams = $data['teams'];
 
                 $records->each(function ($user) use ($teams) {

@@ -2,6 +2,8 @@
 
 namespace TomatoPHP\FilamentUsers;
 
+use TomatoPHP\FilamentUsers\Console\PublishUserResourceCommand;
+use TomatoPHP\FilamentUsers\Services\FilamentUserServices;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
@@ -11,7 +13,7 @@ class FilamentUsersServiceProvider extends ServiceProvider
     {
         // Register generate command
         $this->commands([
-            \TomatoPHP\FilamentUsers\Console\PublishUserResourceCommand::class,
+            PublishUserResourceCommand::class,
         ]);
 
         // Register Config file
@@ -31,7 +33,7 @@ class FilamentUsersServiceProvider extends ServiceProvider
         ], 'filament-users-lang');
 
         $this->app->bind('filament-user', function () {
-            return new \TomatoPHP\FilamentUsers\Services\FilamentUserServices;
+            return new FilamentUserServices;
         });
     }
 

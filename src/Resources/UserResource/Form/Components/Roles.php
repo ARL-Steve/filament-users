@@ -10,9 +10,9 @@ class Roles extends Component
     /**
      * @return Select
      */
-    public static function make(): Forms\Components\Select
+    public static function make(): Select
     {
-        return Forms\Components\Select::make('roles')
+        return Select::make('roles')
             ->columnSpanFull()
             ->multiple()
             ->preload()

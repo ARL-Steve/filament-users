@@ -2,13 +2,14 @@
 
 namespace TomatoPHP\FilamentUsers\Resources\UserResource\Table\Columns;
 
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables;
 
 class Verified extends Column
 {
-    public static function make(): Tables\Columns\IconColumn
+    public static function make(): IconColumn
     {
-        return Tables\Columns\IconColumn::make('email_verified_at')
+        return IconColumn::make('email_verified_at')
             ->state(fn ($record) => (bool) $record->email_verified_at)
             ->boolean()
             ->sortable()
